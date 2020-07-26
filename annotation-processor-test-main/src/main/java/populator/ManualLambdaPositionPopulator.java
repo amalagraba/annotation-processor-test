@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/**
- * Created by amalagraba on 19/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
 public class ManualLambdaPositionPopulator implements PositionPopulator {
 
     private List<BiConsumer<TestBean, String>> setters = new ArrayList<>();

@@ -17,19 +17,19 @@ public class Main {
     private static final int elements = 10000000;
 
     public static void main(String[] args) {
-        System.out.println("Initializing...");
-        testPopulator(manual, false);
-        testPopulator(generated, false);
-        testPopulator(lambda, false);
-        testPopulator(manualLambda, false);
-        testPopulator(reflection, false);
+        runTests("Initializing...", false);
+        runTests("Starting tests...", true);
+        runTests("Rerunning tests...", true);
+    }
 
-        System.out.println("Starting tests...");
-        testPopulator(manual, true);
-        testPopulator(generated, true);
-        testPopulator(lambda, true);
-        testPopulator(manualLambda, true);
-        testPopulator(reflection, true);
+    private static void runTests(String title, boolean report) {
+        System.out.println(title);
+        testPopulator(manual, report);
+        testPopulator(generated, report);
+        testPopulator(lambda, report);
+        testPopulator(manualLambda, report);
+        testPopulator(reflection, report);
+        System.out.println("");
     }
 
     private static void testPopulator(PositionPopulator populator, boolean report) {

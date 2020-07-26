@@ -3,35 +3,27 @@ package processor;
 import annotations.Populator;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by amalagraba on 20/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class PopulatorAnnotationProcessor extends AbstractProcessor {
 
-    private Messager messager;
     private PopulatorImplementationGenerator generator;
 
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        generator = new PopulatorImplementationGenerator(
-                processingEnv.getTypeUtils(), processingEnv.getElementUtils(), processingEnv.getFiler());
-        messager = processingEnv.getMessager();
+        generator = new PopulatorImplementationGenerator(processingEnv.getElementUtils(), processingEnv.getFiler());
     }
 
     @Override
@@ -47,15 +39,7 @@ public class PopulatorAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        Set<String> annotations = new HashSet<>(1);
-        annotations.add(Populator.class.getCanonicalName());
-
-        return annotations;
-    }
-
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.latestSupported();
+        return Set.of(Populator.class.getCanonicalName());
     }
 
     private void generateImplementation(TypeElement populator) {
@@ -67,6 +51,6 @@ public class PopulatorAnnotationProcessor extends AbstractProcessor {
     }
 
     private void error(Element e, String msg) {
-        messager.printMessage(Diagnostic.Kind.ERROR, msg, e);
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, msg, e);
     }
 }

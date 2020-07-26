@@ -7,6 +7,8 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
@@ -16,7 +18,6 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,24 +25,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by amalagraba on 20/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class PopulatorImplementationGenerator {
 
-    private Types typeUtils;
-    private Elements elementUtils;
-    private Filer filer;
+    private final Elements elementUtils;
+    private final Filer filer;
 
-    public PopulatorImplementationGenerator(Types typeUtils, Elements elementUtils, Filer filer) {
-        this.typeUtils = typeUtils;
-        this.elementUtils = elementUtils;
-        this.filer = filer;
-    }
 
-    public void generate(TypeElement element) throws GenerationException, IOException {
+    void generate(TypeElement element) throws GenerationException, IOException {
         TypeSpec.Builder builder = TypeSpec
                 .classBuilder(element.getSimpleName().toString() + "Impl")
                 .addModifiers(Modifier.PUBLIC)
@@ -113,7 +104,8 @@ public class PopulatorImplementationGenerator {
             if (element.getKind() == ElementKind.METHOD) {
                 ExecutableElement method = (ExecutableElement) element;
 
-                if (!method.getModifiers().contains(Modifier.STATIC)) {
+                if (!method.getModifiers().contains(Modifier.STATIC)
+                        && !method.getModifiers().contains(Modifier.DEFAULT)) {
                     methods.add(new PopulatorMethod(elementUtils, method));
                 }
             }

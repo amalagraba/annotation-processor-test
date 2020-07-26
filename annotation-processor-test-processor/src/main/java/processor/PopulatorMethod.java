@@ -10,11 +10,6 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import java.util.List;
 
-/**
- * Created by amalagraba on 20/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
 @Getter
 public class PopulatorMethod {
 

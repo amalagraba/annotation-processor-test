@@ -2,11 +2,6 @@ package populator;
 
 import model.TestBean;
 
-/**
- * Created by amalagraba on 19/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
 public class ManualPositionPopulator implements PositionPopulator {
 
     public TestBean populate(String string) {

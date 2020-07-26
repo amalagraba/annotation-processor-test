@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by amalagraba on 19/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
 public class ReflectionPositionPopulator implements PositionPopulator {
 
     List<Method> setters = new ArrayList<>();

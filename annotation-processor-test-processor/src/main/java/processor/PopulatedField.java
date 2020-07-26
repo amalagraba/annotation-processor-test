@@ -5,11 +5,6 @@ import lombok.Getter;
 
 import javax.lang.model.element.VariableElement;
 
-/**
- * Created by amalagraba on 20/02/2019.
- * Arteco Consulting Sl
- * mailto: info@arteco-consulting.com
- */
 @Getter
 public class PopulatedField {
 
